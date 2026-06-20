@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import heroImg from "@/assets/hero-grove.jpg";
 import caseOlive from "@/assets/case-olive.jpg";
@@ -674,6 +674,18 @@ function Contact() {
                   {errorMsg || "Invio non riuscito. Riprova o scrivi a info@studioagrotech.it."}
                 </p>
               )}
+              <label className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                <input
+                  type="checkbox"
+                  name="privacy"
+                  required
+                  className="mt-1 h-4 w-4 rounded border-border text-[var(--green2)] focus:ring-[var(--green2)] cursor-pointer"
+                />
+                <span>
+                  Dichiaro di aver letto l'<Link to="/privacy" className="text-[var(--green2)] hover:underline">informativa privacy</Link>{" "}
+                  e acconsento al trattamento dei dati per essere ricontattato in merito alla richiesta inviata. *
+                </span>
+              </label>
               <button
                 type="submit"
                 disabled={status === "loading"}
@@ -681,7 +693,9 @@ function Contact() {
               >
                 {status === "loading" ? "Invio in corso…" : "Invia richiesta →"}
               </button>
-              <p className="text-xs text-muted-foreground">Trattiamo i dati secondo la Privacy Policy. Niente newsletter, niente terze parti.</p>
+              <p className="text-xs text-muted-foreground">
+                Trattiamo i dati secondo la <Link to="/privacy" className="underline hover:text-[var(--ink)]">Privacy Policy</Link>. Niente newsletter, niente terze parti.
+              </p>
             </>
           )}
         </form>
@@ -742,7 +756,7 @@ function Footer() {
               >
                 LinkedIn
               </a>
-            </li>
+            <li><Link to="/privacy" className="hover:text-[var(--paper)]">Privacy Policy</Link></li>
           </ul>
         </div>
       </div>
