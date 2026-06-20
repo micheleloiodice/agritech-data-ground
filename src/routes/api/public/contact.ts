@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 
 const NOTIFY_TO = "info@studioagrotech.it";
-const FROM_EMAIL = "Studio Agrotech <noreply@micheleloiodice.it>";
+const FROM_EMAIL = "Studio Tecnico Agrotech <info@studioagrotech.it>";
 
 const schema = z.object({
   nome: z.string().trim().min(2, "Nome obbligatorio").max(200),
@@ -37,7 +37,7 @@ type SendPayload = {
 };
 
 function buildEmail(payload: SendPayload) {
-  const subject = `Nuova richiesta dal sito — ${payload.servizio}`;
+  const subject = "Nuova richiesta dal sito Studio Tecnico Agrotech";
   const rows: [string, string][] = [
     ["Nome e cognome", payload.nome],
     ["Email", payload.email],
