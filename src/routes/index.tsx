@@ -30,7 +30,7 @@ export const Route = createFileRoute("/")({
           description: "Studio del Dott. Agr. Michele Loiodice — agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico e finanza agevolata.",
           email: "info@studioagrotech.it",
           telephone: "+39 380 1428442",
-          url: "https://agritech-data-ground.lovable.app/",
+          url: "https://micheleloiodice.it/",
           address: {
             "@type": "PostalAddress",
             streetAddress: "Piazza Caduti in guerra, 11",

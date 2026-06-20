@@ -7,7 +7,7 @@ export const Route = createFileRoute("/privacy")({
       { name: "description", content: "Informativa sul trattamento dei dati personali raccolti tramite il sito dello Studio Tecnico Agrotech." },
       { name: "robots", content: "index,follow" },
     ],
-    links: [{ rel: "canonical", href: "/privacy" }],
+    links: [{ rel: "canonical", href: "https://micheleloiodice.it/privacy" }],
   }),
   component: PrivacyPage,
 });
