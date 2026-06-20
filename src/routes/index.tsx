@@ -756,6 +756,7 @@ function Footer() {
               >
                 LinkedIn
               </a>
+            </li>
             <li><Link to="/privacy" className="hover:text-[var(--paper)]">Privacy Policy</Link></li>
           </ul>
         </div>
