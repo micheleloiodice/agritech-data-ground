@@ -80,6 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Studio Tecnico Agrotech — Dott. Agr. Michele Loiodice" },
       { name: "description", content: "Agronomo in Piazza Caduti in guerra, 11 — Corato (BA), Puglia. Agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico e finanza agevolata per aziende agricole." },
       { name: "author", content: "Studio Tecnico Agrotech" },
+      { name: "google-site-verification", content: "Ni4G8K0HVIKy2qOEjnF0hrA83GAd9oh-M86_biFIJDY" },
       { property: "og:title", content: "Studio Tecnico Agrotech — Dott. Agr. Michele Loiodice" },
       { property: "og:description", content: "Agronomo in Piazza Caduti in guerra, 11 — Corato (BA), Puglia. Agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico e finanza agevolata per aziende agricole." },
       { property: "og:type", content: "website" },
