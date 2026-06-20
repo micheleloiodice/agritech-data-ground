@@ -155,6 +155,7 @@ export const Route = createFileRoute("/api/public/contact")({
           timeStyle: "short",
         });
 
+        const now = new Date();
         // 1) Insert first — guarantees we never lose the contact.
         const { data: inserted, error: dbError } = await supabaseAdmin
           .from("contact_requests")
@@ -171,6 +172,9 @@ export const Route = createFileRoute("/api/public/contact")({
             email_sent: false,
             email_error: null,
             status: "pending",
+            privacy_accepted: true,
+            privacy_accepted_at: now.toISOString(),
+            privacy_version: PRIVACY_VERSION,
           })
           .select("id")
           .single();
