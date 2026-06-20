@@ -5,7 +5,7 @@ import caseOlive from "@/assets/case-olive.jpg";
 import caseAgri from "@/assets/case-agrivoltaico.jpg";
 import case3d from "@/assets/case-3d.jpg";
 import caseFinance from "@/assets/case-finance.jpg";
-import portrait from "@/assets/portrait.jpg";
+import portraitChisono from "@/assets/portrait-chisono.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -366,7 +366,7 @@ function About() {
       <div className="container-page grid lg:grid-cols-[0.85fr_1fr] gap-12 lg:gap-20 items-center">
         <div className="order-2 lg:order-1 relative">
           <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-border max-w-md">
-            <img src={portrait} alt="Dott. Agr. Michele Loiodice" loading="lazy" className="w-full h-full object-cover" />
+            <img src={portraitChisono.url} alt="Dott. Agr. Michele Loiodice" loading="lazy" className="w-full h-full object-cover" />
           </div>
           <div className="hidden lg:block absolute -bottom-6 -right-6 bg-[var(--ink)] text-[var(--paper)] p-5 rounded-xl max-w-[220px]">
             <div className="font-display text-2xl">Corato</div>
