@@ -65,7 +65,7 @@ const CASES = [
   { img: caseOlive, tag: "Precisione", title: "Rilievo multispettrale su oliveto secolare", problem: "Cliente con 42 ha di olivo in calo produttivo, cause non chiare.", method: "Volo drone multispettrale, indice NDVI/NDRE, campionamento mirato.", output: "Mappa di vigore, 3 zone omogenee, piano di reintegro nutrizionale differenziato." },
   { img: caseAgri, tag: "Agrivoltaico", title: "Studio agronomico per impianto agrivoltaico", problem: "Sviluppatore con terreno a seminativo, serve compatibilità con coltura.", method: "Analisi pedoclimatica, scelta colturale, simulazione resa sotto pannello.", output: "Relazione agronomica per autorizzazione e cronoprogramma colturale 10 anni." },
   { img: case3d, tag: "Rilievo 3D", title: "Rilievo 3D di fabbricato rurale", problem: "Pratica di ristrutturazione, planimetria catastale non corrispondente.", method: "Volo fotogrammetrico, nuvola di punti, modello mesh georeferenziato.", output: "Planimetrie aggiornate, sezioni e prospetti pronti per progettista e Comune." },
-  { img: caseFinance, tag: "Finanza", title: "Business plan e finanza agevolata", problem: "Giovane imprenditrice agricola, primo insediamento e nuovo impianto mandorlo.", method: "Costruzione piano colturale, computo, business plan e domanda PSR.", output: "Pratica ammessa al finanziamento, ~340k€ tra contributo e premio." },
+  { img: caseFinance, tag: "Finanza", title: "Business plan e finanza agevolata", problem: "Giovane imprenditrice agricola, primo insediamento e nuovo impianto mandorlo.", method: "Costruzione piano colturale, computo, business plan e domanda PSR.", output: "Pratica ammessa al finanziamento.\u00a0" },
 ];
 
 function Home() {
