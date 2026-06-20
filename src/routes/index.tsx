@@ -391,12 +391,11 @@ function About() {
               È così che un progetto arriva fino all'autorizzazione, al finanziamento e al campo.
             </p>
           </div>
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-px bg-border rounded-xl overflow-hidden border border-border max-w-xl">
+          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-px bg-border rounded-xl overflow-hidden border border-border max-w-xl">
             {[
               ["10+", "anni di campo"],
               ["120+", "ettari rilevati"],
               ["35+", "pratiche concluse"],
-              ["€4M+", "finanziamenti ottenuti"],
             ].map(([k, v]) => (
               <div key={v} className="bg-[var(--paper)] p-4">
                 <div className="font-display text-xl text-[var(--ink)]">{k}</div>
