@@ -211,9 +211,9 @@ function HeroVisual() {
         </div>
         {/* metrics bar */}
         <div className="grid grid-cols-3 divide-x divide-[var(--paper)]/10 bg-[var(--ink)] text-[var(--paper)]">
-          <Metric k="42,3 ha" v="Superficie" />
+          <Metric k="40+ ha" v="Analizzati" />
           <Metric k="3" v="Zone omogenee" />
-          <Metric k="−18%" v="Input previsti" />
+          <Metric k="↓" v="Input ottimizzati" />
         </div>
       </div>
     </div>
@@ -534,9 +534,9 @@ function About() {
           </div>
           <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-px bg-border rounded-xl overflow-hidden border border-border max-w-xl">
             {[
-              ["10+", "anni di campo"],
-              ["120+", "ettari rilevati"],
-              ["35+", "pratiche concluse"],
+              ["dal 2017", "esperienza diretta in campo"],
+              ["120+", "ettari mappati e analizzati"],
+              ["35+", "pratiche tecniche seguite"],
             ].map(([k, v]) => (
               <div key={v} className="bg-[var(--paper)] p-4">
                 <div className="font-display text-xl text-[var(--ink)]">{k}</div>
