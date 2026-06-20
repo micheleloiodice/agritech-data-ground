@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import heroImg from "@/assets/hero-multispectral.jpg";
+import heroImg from "@/assets/hero-grove.jpg";
 import caseOlive from "@/assets/case-olive.jpg";
 import caseAgri from "@/assets/case-agrivoltaico.jpg";
 import case3d from "@/assets/case-3d.jpg";
@@ -120,40 +120,96 @@ function Hero() {
             <span className="w-2 h-2 rounded-full bg-[var(--accent)]" />
             Dott. Agr. Michele Loiodice · Corato / Puglia
           </p>
-          <h1 className="text-[clamp(2.4rem,5.5vw,4.2rem)] leading-[1.02]">
+          <h1 className="text-[clamp(2.5rem,5.8vw,4.4rem)] leading-[1.02]">
             Decisioni agricole basate su <em className="not-italic text-[var(--green2)]">dati</em>, non su impressioni.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
-            Agricoltura di precisione, rilievi drone, progettazione agraria, pratiche autorizzative
-            e supporto finanziario per aziende agricole che vogliono investire senza improvvisare.
+            Agricoltura di precisione, rilievi drone, progettazione agraria, pratiche
+            autorizzative e finanza agevolata per aziende agricole che vogliono investire
+            senza improvvisare.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#contatti" className="btn-primary">Parliamo del progetto →</a>
             <a href="#portfolio" className="btn-ghost">Vedi applicazioni pratiche</a>
           </div>
-        </div>
-
-        <div className="relative">
-          <div className="absolute -inset-6 bg-gradient-to-br from-[var(--green2)]/15 to-[var(--accent)]/10 rounded-3xl blur-2xl" aria-hidden />
-          <div className="relative rounded-2xl overflow-hidden border border-border bg-card shadow-[0_30px_60px_-30px_rgba(19,40,31,0.35)]">
-            <img src={heroImg} alt="Mappa multispettrale di un oliveto con dashboard agronomica" width={1280} height={960} className="w-full h-auto object-cover" />
-            <div className="grid grid-cols-3 divide-x divide-border border-t border-border bg-[var(--paper)]">
-              <Metric k="42,3 ha" v="Superficie rilevata" />
-              <Metric k="3" v="Zone omogenee" />
-              <Metric k="−18%" v="Input previsti" />
-            </div>
+          <div className="mt-10 flex items-center gap-6 text-xs text-muted-foreground">
+            <span className="flex items-center gap-2"><Dot /> Risposta entro 48 h</span>
+            <span className="flex items-center gap-2"><Dot /> Prima lettura gratuita</span>
           </div>
         </div>
+
+        <HeroVisual />
       </div>
     </section>
+  );
+}
+
+function Dot() {
+  return <span className="w-1.5 h-1.5 rounded-full bg-[var(--green2)]" aria-hidden />;
+}
+
+function HeroVisual() {
+  return (
+    <div className="relative">
+      <div className="absolute -inset-8 bg-gradient-to-br from-[var(--green2)]/20 via-transparent to-[var(--accent)]/10 rounded-[2rem] blur-2xl" aria-hidden />
+      <div className="relative rounded-2xl overflow-hidden border border-border bg-[var(--ink)] shadow-[0_40px_80px_-40px_rgba(19,40,31,0.55)]">
+        {/* aerial */}
+        <div className="relative aspect-[5/4]">
+          <img
+            src={heroImg}
+            alt="Vista aerea drone di un oliveto in Puglia"
+            width={1024}
+            height={1024}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          {/* NDVI overlay */}
+          <div className="absolute inset-0 mix-blend-multiply opacity-60" aria-hidden
+               style={{background: "linear-gradient(135deg, rgba(47,93,70,0.55) 0%, rgba(19,40,31,0.25) 50%, rgba(182,107,61,0.35) 100%)"}} />
+          {/* zone markers */}
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+            <path d="M5,15 L42,8 L48,38 L18,45 Z" fill="none" stroke="#f8f5ef" strokeWidth="0.3" strokeDasharray="0.8 0.6" />
+            <path d="M50,42 L92,30 L95,68 L58,72 Z" fill="none" stroke="#b66b3d" strokeWidth="0.35" strokeDasharray="0.8 0.6" />
+            <path d="M22,58 L52,75 L40,92 L8,82 Z" fill="none" stroke="#f8f5ef" strokeWidth="0.3" strokeDasharray="0.8 0.6" />
+          </svg>
+          {/* floating labels */}
+          <span className="absolute top-4 left-4 text-[10px] uppercase tracking-[0.18em] text-[var(--paper)]/90 font-medium bg-[var(--ink)]/55 backdrop-blur px-2.5 py-1 rounded-full border border-[var(--paper)]/15">
+            NDVI · Vol. 14 Mag
+          </span>
+          <span className="absolute top-4 right-4 flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] text-[var(--paper)]/90 font-medium bg-[var(--ink)]/55 backdrop-blur px-2.5 py-1 rounded-full border border-[var(--paper)]/15">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" /> Live
+          </span>
+          {/* zone chips */}
+          <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2 text-[10px] font-medium">
+            <Chip color="#f8f5ef" label="Zona A · vigore alto" />
+            <Chip color="#b66b3d" label="Zona B · stress idrico" />
+            <Chip color="#2f5d46" label="Zona C · da reintegrare" />
+          </div>
+        </div>
+        {/* metrics bar */}
+        <div className="grid grid-cols-3 divide-x divide-[var(--paper)]/10 bg-[var(--ink)] text-[var(--paper)]">
+          <Metric k="42,3 ha" v="Superficie" />
+          <Metric k="3" v="Zone omogenee" />
+          <Metric k="−18%" v="Input previsti" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Chip({ color, label }: { color: string; label: string }) {
+  return (
+    <span className="flex items-center gap-1.5 bg-[var(--ink)]/70 backdrop-blur text-[var(--paper)] px-2 py-1 rounded-full border border-[var(--paper)]/15">
+      <span className="w-1.5 h-1.5 rounded-full" style={{ background: color }} />
+      {label}
+    </span>
   );
 }
 
 function Metric({ k, v }: { k: string; v: string }) {
   return (
     <div className="p-4">
-      <div className="font-display text-2xl text-[var(--ink)]">{k}</div>
-      <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{v}</div>
+      <div className="font-display text-2xl">{k}</div>
+      <div className="text-[10px] uppercase tracking-[0.18em] opacity-60 mt-1">{v}</div>
     </div>
   );
 }
