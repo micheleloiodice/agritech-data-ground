@@ -279,26 +279,33 @@ function Method() {
   return (
     <section id="metodo" className="section-pad bg-[var(--ink)] text-[var(--paper)] relative">
       <div className="container-page">
-        <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-20 items-start">
-          <div>
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-14 lg:gap-24 items-start">
+          <div className="lg:sticky lg:top-28">
             <p className="eyebrow mb-3" style={{ color: "#b66b3d" }}>Metodo operativo</p>
-            <h2 className="text-[clamp(1.9rem,3.5vw,2.8rem)] leading-[1.1] text-[var(--paper)]">
-              Il cliente non compra innovazione.
+            <h2 className="text-[clamp(2rem,3.6vw,3rem)] leading-[1.05] text-[var(--paper)]">
+              Il cliente non compra<br/>innovazione.
             </h2>
-            <p className="mt-5 text-[var(--paper)]/75 text-lg leading-relaxed max-w-md">
-              Compra <span className="text-[var(--paper)]">meno rischio</span>, <span className="text-[var(--paper)]">meno confusione</span>
-              {" "}e un progetto <span className="text-[var(--paper)]">più difendibile</span> davanti a banche, enti e soci.
+            <p className="mt-6 text-[var(--paper)]/70 text-lg leading-relaxed max-w-md">
+              Compra <span className="text-[var(--paper)]">meno rischio</span>,
+              {" "}<span className="text-[var(--paper)]">meno confusione</span>
+              {" "}e un progetto <span className="text-[var(--paper)]">più difendibile</span>
+              {" "}davanti a banche, enti e soci.
             </p>
+            <div className="mt-8 inline-flex items-center gap-3 text-sm text-[var(--paper)]/60">
+              <span className="h-px w-10 bg-[var(--accent)]" />
+              5 fasi · in media 6–10 settimane
+            </div>
           </div>
 
-          <ol className="relative grid gap-px lg:grid-cols-5 bg-[var(--paper)]/10 rounded-xl overflow-hidden">
-            {METHOD.map((m) => (
-              <li key={m.n} className="bg-[var(--ink)] p-6 lg:p-5 flex lg:flex-col gap-4 lg:gap-3">
-                <div className="font-display text-sm text-[var(--accent)] shrink-0">{m.n}</div>
-                <div>
-                  <div className="font-display text-lg text-[var(--paper)]">{m.t}</div>
-                  <p className="text-sm text-[var(--paper)]/65 mt-1.5 leading-relaxed">{m.d}</p>
-                </div>
+          <ol className="relative">
+            <span className="absolute left-[14px] top-2 bottom-2 w-px bg-[var(--paper)]/15" aria-hidden />
+            {METHOD.map((m, i) => (
+              <li key={m.n} className="relative pl-12 pb-10 last:pb-0">
+                <span className="absolute left-0 top-0 grid place-items-center w-8 h-8 rounded-full bg-[var(--green2)] text-[var(--paper)] text-xs font-display border-2 border-[var(--ink)]">
+                  {i + 1}
+                </span>
+                <div className="font-display text-2xl text-[var(--paper)] leading-tight">{m.t}</div>
+                <p className="mt-2 text-[var(--paper)]/65 leading-relaxed max-w-md">{m.d}</p>
               </li>
             ))}
           </ol>
