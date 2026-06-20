@@ -62,7 +62,7 @@ const METHOD = [
 ];
 
 const CASES = [
-  { img: caseOlive, tag: "Precisione", title: "Rilievo multispettrale su oliveto secolare", problem: "Cliente con 42 ha di olivo in calo produttivo, cause non chiare.", method: "Volo drone multispettrale, indice NDVI/NDRE, campionamento mirato.", output: "Mappa di vigore, 3 zone omogenee, piano di reintegro nutrizionale differenziato." },
+  { img: caseOlive, tag: "Precisione", title: "Rilievo multispettrale su oliveto secolare", problem: "Azienda olivicola multiparcellare con cali produttivi e cause non immediatamente chiare.", method: "Volo drone multispettrale, indice NDVI/NDRE, campionamento mirato.", output: "Mappa di vigore, 3 zone omogenee, piano di reintegro nutrizionale differenziato." },
   { img: caseAgri, tag: "Agrivoltaico", title: "Studio agronomico per impianto agrivoltaico", problem: "Sviluppatore con terreno a seminativo, serve compatibilità con coltura.", method: "Analisi pedoclimatica, scelta colturale, simulazione resa sotto pannello.", output: "Relazione agronomica per autorizzazione e cronoprogramma colturale 10 anni." },
   { img: case3d, tag: "Rilievo 3D", title: "Rilievo 3D di fabbricato rurale", problem: "Pratica di ristrutturazione, planimetria catastale non corrispondente.", method: "Volo fotogrammetrico, nuvola di punti, modello mesh georeferenziato.", output: "Planimetrie aggiornate, sezioni e prospetti pronti per progettista e Comune." },
   { img: caseFinance, tag: "Finanza", title: "Business plan e finanza agevolata", problem: "Giovane imprenditrice agricola, primo insediamento e nuovo impianto mandorlo.", method: "Costruzione piano colturale, computo, business plan e domanda PSR.", output: "Pratica ammessa al finanziamento.\u00a0" },
@@ -213,7 +213,7 @@ function HeroVisual() {
         <div className="grid grid-cols-3 divide-x divide-[var(--paper)]/10 bg-[var(--ink)] text-[var(--paper)]">
           <Metric k="40+ ha" v="Analizzati" />
           <Metric k="3" v="Zone omogenee" />
-          <Metric k="↓" v="Input ottimizzati" />
+          <Metric k="Input" v="ottimizzati" />
         </div>
       </div>
     </div>
@@ -241,7 +241,7 @@ function Metric({ k, v }: { k: string; v: string }) {
 function TrustBar() {
   const items = [
     "Dottore Agronomo",
-    "Rilievi APR / drone certificati",
+    "Rilievi APR con pilota abilitato e analisi GIS",
     "Master agricoltura di precisione",
     "Olivo · Mandorlo · Cereali · Agrivoltaico",
   ];
@@ -666,8 +666,8 @@ function Contact() {
                 <textarea name="messaggio" rows={4} required minLength={5} className="w-full bg-[var(--paper)] border border-border rounded-lg px-3.5 py-3 text-[var(--ink)] focus:outline-none focus:border-[var(--green2)]" />
               </div>
               {/* Honeypot — hidden from real users */}
-              <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
-                <label>Website<input type="text" name="website" tabIndex={-1} autoComplete="off" /></label>
+              <div className="sr-only" aria-hidden="true">
+                <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
               </div>
               {status === "error" && (
                 <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">
