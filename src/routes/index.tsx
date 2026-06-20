@@ -595,7 +595,7 @@ function Contact() {
           <div className="mt-8 space-y-3 text-sm">
             <div className="flex gap-3"><span className="text-[var(--green2)] w-20">Email</span> <a href="mailto:info@studioagrotech.it" className="text-[var(--ink)] hover:underline">info@studioagrotech.it</a></div>
             <div className="flex gap-3"><span className="text-[var(--green2)] w-20">Telefono</span> <a href="tel:+393801428442" className="text-[var(--ink)] hover:underline">+39 3801428442</a></div>
-            <div className="flex gap-3"><span className="text-[var(--green2)] w-20">Sede</span> <span>Corato (BA), Puglia</span></div>
+            <div className="flex gap-3"><span className="text-[var(--green2)] w-20">Sede</span> <span>Piazza Caduti in guerra, 11&nbsp;<br />Corato (BA), Puglia</span></div>
           </div>
         </div>
 
@@ -702,7 +702,7 @@ function Footer() {
         <div>
           <div className="text-[var(--paper)] font-display mb-3">Studio</div>
           <ul className="space-y-2">
-            <li>Corato (BA), Puglia</li>
+            <li>Piazza Caduti in guerra, 11&nbsp;<br />Corato (BA), Puglia</li>
             <li>P.IVA 08603960728</li>
             <li>Ordine Agronomi sez. A</li>
           </ul>
