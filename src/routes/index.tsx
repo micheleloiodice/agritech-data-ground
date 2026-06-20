@@ -13,12 +13,33 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Studio Tecnico Agrotech — Agronomo a Corato, Puglia" },
-      { name: "description", content: "Dott. Agr. Michele Loiodice: agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico, finanza agevolata e pratiche autorizzative in Puglia." },
+      { name: "description", content: "Dott. Agr. Michele Loiodice — studio in Piazza Caduti in guerra, 11, Corato (BA). Agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico, finanza agevolata e pratiche autorizzative in Puglia." },
       { property: "og:title", content: "Studio Tecnico Agrotech — Agronomo a Corato" },
-      { property: "og:description", content: "Decisioni agricole basate su dati, non su impressioni." },
+      { property: "og:description", content: "Dott. Agr. Michele Loiodice — studio in Piazza Caduti in guerra, 11, Corato (BA), Puglia. Decisioni agricole basate su dati." },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "Studio Tecnico Agrotech",
+          description: "Studio del Dott. Agr. Michele Loiodice — agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico e finanza agevolata.",
+          email: "info@studioagrotech.it",
+          telephone: "+39 380 1428442",
+          url: "https://agritech-data-ground.lovable.app/",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Piazza Caduti in guerra, 11",
+            addressLocality: "Corato",
+            addressRegion: "BA",
+            addressCountry: "IT",
+          },
+        }),
+      },
+    ],
   }),
   component: Home,
 });
