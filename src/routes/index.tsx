@@ -695,7 +695,7 @@ function Footer() {
             <span className="font-display text-[var(--paper)]">Studio Tecnico Agrotech</span>
           </div>
           <p className="max-w-sm leading-relaxed">
-            Dott. Agr. Michele Loiodice — iscritto all'Ordine di Bari, sez. A n. 1623.
+            Dott. Agr. Michele Loiodice — iscritto all'Ordine di Bari, sez. A n. 1623.&nbsp;<br />
             Consulenza, progettazione e dati per l'impresa agricola in Puglia.
           </p>
         </div>
