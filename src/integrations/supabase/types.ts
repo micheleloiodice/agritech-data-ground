@@ -26,6 +26,7 @@ export type Database = {
           messaggio: string
           nome: string
           servizio: string
+          status: string
           superficie: string | null
           telefono: string | null
           user_agent: string | null
@@ -41,6 +42,7 @@ export type Database = {
           messaggio: string
           nome: string
           servizio: string
+          status?: string
           superficie?: string | null
           telefono?: string | null
           user_agent?: string | null
@@ -56,6 +58,7 @@ export type Database = {
           messaggio?: string
           nome?: string
           servizio?: string
+          status?: string
           superficie?: string | null
           telefono?: string | null
           user_agent?: string | null
