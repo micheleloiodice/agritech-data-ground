@@ -4,6 +4,8 @@ import { z } from "zod";
 const NOTIFY_TO = "info@studioagrotech.it";
 const FROM_EMAIL = "Studio Tecnico Agrotech <info@studioagrotech.it>";
 
+const PRIVACY_VERSION = "v1-2026-06";
+
 const schema = z.object({
   nome: z.string().trim().min(2, "Nome obbligatorio").max(200),
   email: z.string().trim().email("Email non valida").max(320),
@@ -12,6 +14,9 @@ const schema = z.object({
   superficie: z.string().trim().max(100).optional().or(z.literal("")),
   servizio: z.string().trim().min(1, "Servizio richiesto").max(200),
   messaggio: z.string().trim().min(5, "Messaggio troppo breve").max(5000),
+  privacy: z.literal(true, {
+    errorMap: () => ({ message: "Devi accettare l'informativa privacy" }),
+  }),
   // Honeypot — must be empty
   website: z.string().max(0).optional().or(z.literal("")),
 });
