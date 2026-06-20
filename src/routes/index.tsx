@@ -541,7 +541,44 @@ function About() {
 }
 
 function Contact() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const payload = {
+      nome: String(fd.get("nome") || "").trim(),
+      email: String(fd.get("email") || "").trim(),
+      telefono: String(fd.get("telefono") || "").trim(),
+      azienda: String(fd.get("azienda") || "").trim(),
+      superficie: String(fd.get("superficie") || "").trim(),
+      servizio: String(fd.get("servizio") || "").trim(),
+      messaggio: String(fd.get("messaggio") || "").trim(),
+      website: String(fd.get("website") || ""), // honeypot
+    };
+
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/public/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error === "validation" ? "Controlla i campi obbligatori." : "Invio non riuscito.");
+      }
+      setStatus("sent");
+      form.reset();
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "Errore di rete. Riprova.");
+    }
+  }
+
   return (
     <section id="contatti" className="section-pad">
       <div className="container-page grid lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20">
@@ -563,24 +600,37 @@ function Contact() {
         </div>
 
         <form
-          onSubmit={(e) => { e.preventDefault(); setSent(true); }}
+          onSubmit={handleSubmit}
+          noValidate
           className="bg-card border border-border rounded-2xl p-7 sm:p-9 grid gap-5"
         >
-          {sent ? (
+          {status === "sent" ? (
             <div className="py-12 text-center">
               <div className="font-display text-2xl text-[var(--green2)]">Richiesta inviata.</div>
               <p className="text-muted-foreground mt-2">Ti rispondo entro 48 ore lavorative.</p>
+              <button
+                type="button"
+                onClick={() => setStatus("idle")}
+                className="mt-6 text-sm text-[var(--green2)] hover:underline"
+              >
+                Invia un'altra richiesta
+              </button>
             </div>
           ) : (
             <>
-              <Field label="Nome e cognome" name="nome" required />
+              <Field label="Nome e cognome" name="nome" required autoComplete="name" />
               <div className="grid sm:grid-cols-2 gap-5">
-                <Field label="Azienda / Località" name="azienda" />
+                <Field label="Email" name="email" type="email" required autoComplete="email" />
+                <Field label="Telefono" name="telefono" type="tel" autoComplete="tel" placeholder="opzionale" />
+              </div>
+              <div className="grid sm:grid-cols-2 gap-5">
+                <Field label="Azienda / Località" name="azienda" autoComplete="organization" />
                 <Field label="Superficie indicativa" name="superficie" placeholder="es. 12 ha" />
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">Servizio richiesto</label>
-                <select name="servizio" className="w-full bg-[var(--paper)] border border-border rounded-lg px-3.5 py-3 text-[var(--ink)] focus:outline-none focus:border-[var(--green2)]">
+                <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">Servizio richiesto *</label>
+                <select name="servizio" required defaultValue="" className="w-full bg-[var(--paper)] border border-border rounded-lg px-3.5 py-3 text-[var(--ink)] focus:outline-none focus:border-[var(--green2)]">
+                  <option value="" disabled>Seleziona un servizio…</option>
                   <option>Agricoltura di precisione</option>
                   <option>Rilievi drone e GIS</option>
                   <option>Progettazione e finanza agevolata</option>
@@ -591,10 +641,25 @@ function Contact() {
                 </select>
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">Messaggio</label>
-                <textarea name="messaggio" rows={4} required className="w-full bg-[var(--paper)] border border-border rounded-lg px-3.5 py-3 text-[var(--ink)] focus:outline-none focus:border-[var(--green2)]" />
+                <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">Messaggio *</label>
+                <textarea name="messaggio" rows={4} required minLength={5} className="w-full bg-[var(--paper)] border border-border rounded-lg px-3.5 py-3 text-[var(--ink)] focus:outline-none focus:border-[var(--green2)]" />
               </div>
-              <button type="submit" className="btn-primary justify-center mt-2">Invia richiesta →</button>
+              {/* Honeypot — hidden from real users */}
+              <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+                <label>Website<input type="text" name="website" tabIndex={-1} autoComplete="off" /></label>
+              </div>
+              {status === "error" && (
+                <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">
+                  {errorMsg || "Invio non riuscito. Riprova o scrivi a info@studioagrotech.it."}
+                </p>
+              )}
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="btn-primary justify-center mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {status === "loading" ? "Invio in corso…" : "Invia richiesta →"}
+              </button>
               <p className="text-xs text-muted-foreground">Trattiamo i dati secondo la Privacy Policy. Niente newsletter, niente terze parti.</p>
             </>
           )}
@@ -604,14 +669,16 @@ function Contact() {
   );
 }
 
-function Field({ label, name, required, placeholder }: { label: string; name: string; required?: boolean; placeholder?: string }) {
+function Field({ label, name, required, placeholder, type = "text", autoComplete }: { label: string; name: string; required?: boolean; placeholder?: string; type?: string; autoComplete?: string }) {
   return (
     <div>
       <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">{label}{required && " *"}</label>
       <input
         name={name}
+        type={type}
         required={required}
         placeholder={placeholder}
+        autoComplete={autoComplete}
         className="w-full bg-[var(--paper)] border border-border rounded-lg px-3.5 py-3 text-[var(--ink)] focus:outline-none focus:border-[var(--green2)]"
       />
     </div>
