@@ -363,6 +363,123 @@ function Portfolio() {
   );
 }
 
+function CaseStudy3D() {
+  const [open, setOpen] = useState(false);
+  return (
+    <section id="caso-studio-3d" className="section-pad bg-[var(--paper)] border-t border-border">
+      <div className="container-page">
+        <div className="mb-10 max-w-2xl">
+          <p className="eyebrow mb-3">Caso studio in evidenza</p>
+          <h2 className="text-[clamp(1.9rem,3.5vw,2.8rem)] leading-[1.1]">
+            Rilievo 3D di fabbricato rurale
+          </h2>
+        </div>
+
+        <article className="grid lg:grid-cols-[1.15fr_1fr] gap-0 bg-card border border-border rounded-2xl overflow-hidden">
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            aria-label="Guarda il video del caso studio"
+            className="group relative block aspect-[16/10] lg:aspect-auto lg:h-full overflow-hidden bg-[var(--ink)] cursor-pointer"
+          >
+            <img
+              src={thumb3dSplit.url}
+              alt="Confronto prima e dopo: ricostruzione 3D di fabbricato rurale"
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[var(--paper)]/95 text-[var(--green1)] shadow-lg transition-transform group-hover:scale-105">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+            </span>
+          </button>
+
+          <div className="p-7 sm:p-9 flex flex-col gap-5">
+            <p className="text-[15px] leading-relaxed text-foreground/85">
+              Rilievo fotogrammetrico e ricostruzione 3D per documentare lo stato iniziale e finale
+              di un fabbricato rurale. Il confronto prima/dopo permette di rappresentare in modo
+              chiaro geometrie, coperture, volumi, avanzamento lavori e trasformazioni
+              dell'immobile, con un output utile per cliente, tecnico e amministrazione.
+            </p>
+
+            <dl className="text-sm grid gap-2.5">
+              <div className="grid grid-cols-[80px_1fr] gap-3">
+                <dt className="text-[var(--green2)] font-medium">Problema</dt>
+                <dd className="text-muted-foreground">
+                  Documentare lo stato iniziale, l'avanzamento lavori o il confronto prima/dopo di
+                  un fabbricato rurale.
+                </dd>
+              </div>
+              <div className="grid grid-cols-[80px_1fr] gap-3">
+                <dt className="text-[var(--green2)] font-medium">Metodo</dt>
+                <dd className="text-muted-foreground">
+                  Rilievo drone, fotogrammetria e ricostruzione 3D georeferenziata.
+                </dd>
+              </div>
+              <div className="grid grid-cols-[80px_1fr] gap-3">
+                <dt className="text-[var(--green2)] font-medium">Output</dt>
+                <dd className="text-muted-foreground">
+                  Modello 3D, immagini di confronto, documentazione tecnica e materiale utile per
+                  relazione, pratica o verifica lavori.
+                </dd>
+              </div>
+            </dl>
+
+            <div className="mt-auto pt-2">
+              <button
+                type="button"
+                onClick={() => setOpen(true)}
+                className="btn-primary inline-flex items-center gap-2"
+              >
+                Guarda il caso studio
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      {open && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Video caso studio: rilievo 3D di fabbricato rurale"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--ink)]/90 p-4 sm:p-8"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-5xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="Chiudi video"
+              className="absolute -top-10 right-0 text-[var(--paper)] hover:text-[var(--sand)] text-sm tracking-wide cursor-pointer"
+            >
+              Chiudi ✕
+            </button>
+            <video
+              src={video3d.url}
+              poster={thumb3dSplit.url}
+              controls
+              autoPlay
+              preload="metadata"
+              playsInline
+              className="w-full h-auto rounded-xl bg-black shadow-2xl"
+            />
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
 function About() {
   return (
     <section id="chi-sono" className="section-pad bg-[var(--paper)]">
