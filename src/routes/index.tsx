@@ -57,6 +57,7 @@ function Home() {
         <Services />
         <Method />
         <Portfolio />
+        <CaseStudy3D />
         <About />
         <Contact />
       </main>
