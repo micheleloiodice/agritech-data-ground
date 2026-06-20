@@ -16,9 +16,10 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Dott. Agr. Michele Loiodice — studio in Piazza Caduti in guerra, 11, Corato (BA). Agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico, finanza agevolata e pratiche autorizzative in Puglia." },
       { property: "og:title", content: "Studio Tecnico Agrotech — Agronomo a Corato" },
       { property: "og:description", content: "Dott. Agr. Michele Loiodice — studio in Piazza Caduti in guerra, 11, Corato (BA), Puglia. Decisioni agricole basate su dati." },
-      { property: "og:url", content: "/" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://micheleloiodice.it/" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://micheleloiodice.it/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -29,7 +30,7 @@ export const Route = createFileRoute("/")({
           description: "Studio del Dott. Agr. Michele Loiodice — agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico e finanza agevolata.",
           email: "info@studioagrotech.it",
           telephone: "+39 380 1428442",
-          url: "https://agritech-data-ground.lovable.app/",
+          url: "https://micheleloiodice.it/",
           address: {
             "@type": "PostalAddress",
             streetAddress: "Piazza Caduti in guerra, 11",
