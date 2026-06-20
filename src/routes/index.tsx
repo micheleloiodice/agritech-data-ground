@@ -577,8 +577,15 @@ function Contact() {
       superficie: String(fd.get("superficie") || "").trim(),
       servizio: String(fd.get("servizio") || "").trim(),
       messaggio: String(fd.get("messaggio") || "").trim(),
+      privacy: fd.get("privacy") === "on",
       website: String(fd.get("website") || ""), // honeypot
     };
+
+    if (!payload.privacy) {
+      setStatus("error");
+      setErrorMsg("Devi accettare l'informativa privacy per inviare la richiesta.");
+      return;
+    }
 
     setStatus("loading");
     setErrorMsg("");

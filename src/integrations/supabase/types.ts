@@ -25,6 +25,9 @@ export type Database = {
           ip: string | null
           messaggio: string
           nome: string
+          privacy_accepted: boolean
+          privacy_accepted_at: string | null
+          privacy_version: string | null
           servizio: string
           status: string
           superficie: string | null
@@ -41,6 +44,9 @@ export type Database = {
           ip?: string | null
           messaggio: string
           nome: string
+          privacy_accepted?: boolean
+          privacy_accepted_at?: string | null
+          privacy_version?: string | null
           servizio: string
           status?: string
           superficie?: string | null
@@ -57,6 +63,9 @@ export type Database = {
           ip?: string | null
           messaggio?: string
           nome?: string
+          privacy_accepted?: boolean
+          privacy_accepted_at?: string | null
+          privacy_version?: string | null
           servizio?: string
           status?: string
           superficie?: string | null
