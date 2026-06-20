@@ -6,6 +6,8 @@ import caseAgri from "@/assets/case-agrivoltaico.jpg";
 import case3d from "@/assets/case-3d.jpg";
 import caseFinance from "@/assets/case-finance.jpg";
 import portraitChisono from "@/assets/portrait-chisono.jpg.asset.json";
+import thumb3dSplit from "@/assets/thumb-prima-dopo-3d-split.jpg.asset.json";
+import video3d from "@/assets/video-prima-dopo-3d-optimized.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
