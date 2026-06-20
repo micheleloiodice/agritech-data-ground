@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 
 const NOTIFY_TO = "info@studioagrotech.it";
+const FROM_EMAIL = "Studio Agrotech <noreply@micheleloiodice.it>";
 
 const schema = z.object({
   nome: z.string().trim().min(2, "Nome obbligatorio").max(200),
@@ -24,7 +25,7 @@ function escapeHtml(s: string): string {
     .replace(/'/g, "&#39;");
 }
 
-async function trySendEmail(payload: {
+type SendPayload = {
   nome: string;
   email: string;
   telefono?: string;
@@ -33,88 +34,80 @@ async function trySendEmail(payload: {
   servizio: string;
   messaggio: string;
   when: string;
-}): Promise<{ sent: boolean; error?: string }> {
+};
+
+function buildEmail(payload: SendPayload) {
+  const subject = `Nuova richiesta dal sito — ${payload.servizio}`;
+  const rows: [string, string][] = [
+    ["Nome e cognome", payload.nome],
+    ["Email", payload.email],
+    ["Telefono", payload.telefono || "—"],
+    ["Azienda / Località", payload.azienda || "—"],
+    ["Superficie indicativa", payload.superficie || "—"],
+    ["Servizio richiesto", payload.servizio],
+    ["Data e ora", payload.when],
+  ];
+  const html = `
+    <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a1a">
+      <h2 style="color:#2d5016;margin-bottom:16px">Nuova richiesta dal sito</h2>
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        ${rows
+          .map(
+            ([k, v]) =>
+              `<tr><td style="padding:8px 10px;border-bottom:1px solid #eee;color:#666;width:180px"><strong>${escapeHtml(k)}</strong></td><td style="padding:8px 10px;border-bottom:1px solid #eee">${escapeHtml(v)}</td></tr>`,
+          )
+          .join("")}
+      </table>
+      <h3 style="margin-top:24px;color:#2d5016">Messaggio</h3>
+      <div style="white-space:pre-wrap;background:#f7f7f4;padding:14px;border-radius:8px;font-size:14px;line-height:1.5">${escapeHtml(payload.messaggio)}</div>
+    </div>
+  `;
+  const text =
+    rows.map(([k, v]) => `${k}: ${v}`).join("\n") +
+    `\n\nMessaggio:\n${payload.messaggio}`;
+  return { subject, html, text };
+}
+
+async function sendViaResend(
+  payload: SendPayload,
+): Promise<{ sent: boolean; error?: string }> {
+  const resendKey = process.env.RESEND_API_KEY;
+  if (!resendKey) {
+    const msg = "missing_env:RESEND_API_KEY";
+    console.error(`[contact email] ${msg} — set RESEND_API_KEY as a backend secret`);
+    return { sent: false, error: msg };
+  }
+
+  const { subject, html, text } = buildEmail(payload);
+
   try {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${resendKey}`,
+      },
+      body: JSON.stringify({
+        from: FROM_EMAIL,
+        to: [NOTIFY_TO],
+        reply_to: payload.email,
+        subject,
+        html,
+        text,
+      }),
+    });
 
-    const subject = "Nuova richiesta dal sito Studio Tecnico Agrotech";
-    const rows: [string, string][] = [
-      ["Nome e cognome", payload.nome],
-      ["Email", payload.email],
-      ["Telefono", payload.telefono || "—"],
-      ["Azienda / Località", payload.azienda || "—"],
-      ["Superficie indicativa", payload.superficie || "—"],
-      ["Servizio richiesto", payload.servizio],
-      ["Data e ora", payload.when],
-    ];
-
-    const html = `
-      <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a1a">
-        <h2 style="color:#2d5016;margin-bottom:16px">Nuova richiesta dal sito</h2>
-        <table style="width:100%;border-collapse:collapse;font-size:14px">
-          ${rows
-            .map(
-              ([k, v]) =>
-                `<tr><td style="padding:8px 10px;border-bottom:1px solid #eee;color:#666;width:180px"><strong>${escapeHtml(
-                  k,
-                )}</strong></td><td style="padding:8px 10px;border-bottom:1px solid #eee">${escapeHtml(
-                  v,
-                )}</td></tr>`,
-            )
-            .join("")}
-        </table>
-        <h3 style="margin-top:24px;color:#2d5016">Messaggio</h3>
-        <div style="white-space:pre-wrap;background:#f7f7f4;padding:14px;border-radius:8px;font-size:14px;line-height:1.5">${escapeHtml(
-          payload.messaggio,
-        )}</div>
-      </div>
-    `;
-
-    const text =
-      rows.map(([k, v]) => `${k}: ${v}`).join("\n") +
-      `\n\nMessaggio:\n${payload.messaggio}`;
-
-    // Use Supabase Auth Admin's email-less approach is N/A; we use the
-    // built-in pg_net + email queue if available. Fallback: log only.
-    // We attempt Resend via Lovable connector gateway if RESEND_API_KEY is set.
-    const resendKey = process.env.RESEND_API_KEY;
-    const lovableKey = process.env.LOVABLE_API_KEY;
-
-    if (resendKey && lovableKey) {
-      const res = await fetch(
-        "https://connector-gateway.lovable.dev/resend/emails",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${lovableKey}`,
-            "X-Connection-Api-Key": resendKey,
-          },
-          body: JSON.stringify({
-            from: "Studio Agrotech <onboarding@resend.dev>",
-            to: [NOTIFY_TO],
-            reply_to: payload.email,
-            subject,
-            html,
-            text,
-          }),
-        },
-      );
-      if (!res.ok) {
-        const body = await res.text();
-        return { sent: false, error: `resend ${res.status}: ${body.slice(0, 300)}` };
-      }
-      return { sent: true };
+    if (!res.ok) {
+      const body = await res.text();
+      const err = `resend_${res.status}: ${body.slice(0, 400)}`;
+      console.error(`[contact email] send failed: ${err}`);
+      return { sent: false, error: err };
     }
-
-    // No email transport configured yet — the request is safely stored in DB.
-    void supabaseAdmin;
-    return {
-      sent: false,
-      error: "email_transport_not_configured",
-    };
+    return { sent: true };
   } catch (e) {
-    return { sent: false, error: e instanceof Error ? e.message : String(e) };
+    const err = e instanceof Error ? e.message : String(e);
+    console.error(`[contact email] send threw: ${err}`);
+    return { sent: false, error: `exception: ${err}` };
   }
 }
 
@@ -137,7 +130,7 @@ export const Route = createFileRoute("/api/public/contact")({
           );
         }
 
-        // Honeypot — silently accept but do nothing
+        // Honeypot — silently accept
         if (parsed.data.website && parsed.data.website.length > 0) {
           return Response.json({ ok: true });
         }
@@ -157,18 +150,8 @@ export const Route = createFileRoute("/api/public/contact")({
           timeStyle: "short",
         });
 
-        const emailResult = await trySendEmail({
-          nome: parsed.data.nome,
-          email: parsed.data.email,
-          telefono: parsed.data.telefono || undefined,
-          azienda: parsed.data.azienda || undefined,
-          superficie: parsed.data.superficie || undefined,
-          servizio: parsed.data.servizio,
-          messaggio: parsed.data.messaggio,
-          when,
-        });
-
-        const { error: dbError } = await supabaseAdmin
+        // 1) Insert first — guarantees we never lose the contact.
+        const { data: inserted, error: dbError } = await supabaseAdmin
           .from("contact_requests")
           .insert({
             nome: parsed.data.nome,
@@ -180,18 +163,48 @@ export const Route = createFileRoute("/api/public/contact")({
             messaggio: parsed.data.messaggio,
             user_agent: userAgent,
             ip,
-            email_sent: emailResult.sent,
-            email_error: emailResult.error || null,
-          });
+            email_sent: false,
+            email_error: null,
+            status: "pending",
+          })
+          .select("id")
+          .single();
 
-        if (dbError && !emailResult.sent) {
-          console.error("contact insert failed", dbError);
+        if (dbError || !inserted) {
+          console.error("[contact] insert failed", dbError);
           return Response.json(
             { error: "Impossibile registrare la richiesta. Riprova." },
             { status: 500 },
           );
         }
 
+        // 2) Try to send email.
+        const emailResult = await sendViaResend({
+          nome: parsed.data.nome,
+          email: parsed.data.email,
+          telefono: parsed.data.telefono || undefined,
+          azienda: parsed.data.azienda || undefined,
+          superficie: parsed.data.superficie || undefined,
+          servizio: parsed.data.servizio,
+          messaggio: parsed.data.messaggio,
+          when,
+        });
+
+        // 3) Update the row with the send outcome (don't fail the user request).
+        const { error: updateError } = await supabaseAdmin
+          .from("contact_requests")
+          .update({
+            email_sent: emailResult.sent,
+            email_error: emailResult.sent ? null : emailResult.error || "unknown_error",
+            status: emailResult.sent ? "email_sent" : "email_failed",
+          })
+          .eq("id", inserted.id);
+
+        if (updateError) {
+          console.error("[contact] status update failed", updateError);
+        }
+
+        // The contact is saved → respond ok to the user regardless of email outcome.
         return Response.json({ ok: true });
       },
     },
