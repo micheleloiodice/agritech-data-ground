@@ -427,7 +427,7 @@ function Contact() {
           </p>
           <div className="mt-8 space-y-3 text-sm">
             <div className="flex gap-3"><span className="text-[var(--green2)] w-20">Email</span> <a href="mailto:info@studioagrotech.it" className="text-[var(--ink)] hover:underline">info@studioagrotech.it</a></div>
-            <div className="flex gap-3"><span className="text-[var(--green2)] w-20">Telefono</span> <a href="tel:+390000000000" className="text-[var(--ink)] hover:underline">+39 080 000 0000</a></div>
+            <div className="flex gap-3"><span className="text-[var(--green2)] w-20">Telefono</span> <a href="tel:+393801428442" className="text-[var(--ink)] hover:underline">+39 3801428442</a></div>
             <div className="flex gap-3"><span className="text-[var(--green2)] w-20">Sede</span> <span>Corato (BA), Puglia</span></div>
           </div>
         </div>
@@ -506,7 +506,7 @@ function Footer() {
           <div className="text-[var(--paper)] font-display mb-3">Studio</div>
           <ul className="space-y-2">
             <li>Corato (BA), Puglia</li>
-            <li>P.IVA 0000000000</li>
+            <li>P.IVA 08603960728</li>
             <li>Ordine Agronomi sez. A</li>
           </ul>
         </div>
@@ -514,7 +514,7 @@ function Footer() {
           <div className="text-[var(--paper)] font-display mb-3">Contatti</div>
           <ul className="space-y-2">
             <li><a href="mailto:info@studioagrotech.it" className="hover:text-[var(--paper)]">info@studioagrotech.it</a></li>
-            <li><a href="tel:+390000000000" className="hover:text-[var(--paper)]">+39 080 000 0000</a></li>
+            <li><a href="tel:+393801428442" className="hover:text-[var(--paper)]">+39 3801428442</a></li>
             <li><a href="#" className="hover:text-[var(--paper)]">LinkedIn</a></li>
           </ul>
         </div>
