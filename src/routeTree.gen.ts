@@ -13,8 +13,10 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PortfolioApplicazioniPraticheRouteImport } from './routes/portfolio-applicazioni-pratiche'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as ApiPublicContactRouteImport } from './routes/api/public/contact'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 
@@ -39,6 +41,11 @@ const PortfolioApplicazioniPraticheRoute =
     path: '/portfolio-applicazioni-pratiche',
     getParentRoute: () => rootRouteImport,
   } as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -49,6 +56,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicContactRoute = ApiPublicContactRouteImport.update({
   id: '/api/public/contact',
   path: '/api/public/contact',
@@ -64,20 +77,24 @@ const LovableEmailQueueProcessRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/mcp': typeof McpRoute
   '/portfolio-applicazioni-pratiche': typeof PortfolioApplicazioniPraticheRoute
   '/privacy': typeof PrivacyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/api/public/contact': typeof ApiPublicContactRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/mcp': typeof McpRoute
   '/portfolio-applicazioni-pratiche': typeof PortfolioApplicazioniPraticheRoute
   '/privacy': typeof PrivacyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/api/public/contact': typeof ApiPublicContactRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
@@ -85,10 +102,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
+  '/mcp': typeof McpRoute
   '/portfolio-applicazioni-pratiche': typeof PortfolioApplicazioniPraticheRoute
   '/privacy': typeof PrivacyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/api/public/contact': typeof ApiPublicContactRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
 }
@@ -97,30 +116,36 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/contact'
+    | '/mcp'
     | '/portfolio-applicazioni-pratiche'
     | '/privacy'
     | '/privacy-policy'
     | '/sitemap.xml'
+    | '/.well-known/oauth-protected-resource'
     | '/api/public/contact'
     | '/lovable/email/queue/process'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/contact'
+    | '/mcp'
     | '/portfolio-applicazioni-pratiche'
     | '/privacy'
     | '/privacy-policy'
     | '/sitemap.xml'
+    | '/.well-known/oauth-protected-resource'
     | '/api/public/contact'
     | '/lovable/email/queue/process'
   id:
     | '__root__'
     | '/'
     | '/contact'
+    | '/mcp'
     | '/portfolio-applicazioni-pratiche'
     | '/privacy'
     | '/privacy-policy'
     | '/sitemap.xml'
+    | '/.well-known/oauth-protected-resource'
     | '/api/public/contact'
     | '/lovable/email/queue/process'
   fileRoutesById: FileRoutesById
@@ -128,10 +153,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
+  McpRoute: typeof McpRoute
   PortfolioApplicazioniPraticheRoute: typeof PortfolioApplicazioniPraticheRoute
   PrivacyRoute: typeof PrivacyRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   ApiPublicContactRoute: typeof ApiPublicContactRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
 }
@@ -166,6 +193,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PortfolioApplicazioniPraticheRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -178,6 +212,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/contact': {
@@ -200,10 +241,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
+  McpRoute: McpRoute,
   PortfolioApplicazioniPraticheRoute: PortfolioApplicazioniPraticheRoute,
   PrivacyRoute: PrivacyRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   ApiPublicContactRoute: ApiPublicContactRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
 }

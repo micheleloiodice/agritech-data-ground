@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "sdk_version": "2.0.2",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "studio-agrotech-mcp",
+      "version": "0.1.0",
+      "title": "Studio Tecnico Agrotech"
+    },
+    "tools": [
+      {
+        "name": "get_studio_info",
+        "title": "Informazioni studio e contatti",
+        "description": "Restituisce i dati pubblici dello Studio Tecnico Agrotech: professionista, iscrizione all'Ordine, partita IVA, sede, email, telefono, sito e profili social.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_services",
+        "title": "Elenco servizi",
+        "description": "Elenca i servizi offerti dallo Studio Tecnico Agrotech, con il problema affrontato e il risultato consegnato per ciascuno.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "query": {
+              "description": "Filtro testuale facoltativo sul titolo o sulla descrizione del servizio.",
+              "type": "string"
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_case_studies",
+        "title": "Casi studio",
+        "description": "Elenca i casi studio pubblici dello Studio Tecnico Agrotech: problema, metodo tecnico applicato e output consegnato.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {
+            "tag": {
+              "description": "Filtro facoltativo per categoria, es. Precisione, Agrivoltaico, Rilievo 3D, Finanza.",
+              "type": "string"
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_method",
+        "title": "Metodo di lavoro",
+        "description": "Descrive le fasi del metodo di lavoro dello studio, dalla diagnosi iniziale all'affiancamento in esecuzione.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "https://json-schema.org/draft/2020-12/schema",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

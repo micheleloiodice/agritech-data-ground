@@ -14,9 +14,8 @@ const schema = z.object({
   superficie: z.string().trim().max(100).optional().or(z.literal("")),
   servizio: z.string().trim().min(1, "Servizio richiesto").max(200),
   messaggio: z.string().trim().min(5, "Messaggio troppo breve").max(5000),
-  privacy: z.literal(true, {
-    errorMap: () => ({ message: "Devi accettare l'informativa privacy" }),
-  }),
+  privacy: z.literal(true, { message: "Devi accettare l'informativa privacy" }),
+
   // Honeypot — must be empty
   website: z.string().max(0).optional().or(z.literal("")),
 });
