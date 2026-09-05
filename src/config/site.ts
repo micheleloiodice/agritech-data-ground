@@ -14,7 +14,7 @@
  *     (la usa il workflow di deploy);
  *  2. incollandola direttamente nella costante DEFAULT_ACCESS_KEY qui sotto.
  */
-const DEFAULT_ACCESS_KEY = "";
+const DEFAULT_ACCESS_KEY = "1aea8733-729b-4e86-9067-ccc75560ae6d";
 
 export const SITE = {
   name: "Studio Tecnico Agrotech",
