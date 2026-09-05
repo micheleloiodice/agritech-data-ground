@@ -1,196 +1,88 @@
-# AgroTech Insights
+# Studio Tecnico Agrotech — sito web
 
-PROMPT LOVABLE — redesign sito Studio Tecnico Agrotech
+Sito professionale del Dott. Agr. Michele Loiodice (Corato, Puglia).
+Sito **statico** (React + Vite + TanStack Router + Tailwind) pubblicato su
+**GitHub Pages**: nessun server, nessuna dipendenza da Lovable, Supabase o Aruba.
 
-Crea una homepage moderna, premium e molto professionale per "Studio Tecnico Agrotech — Dott. Agr. Michele Loiodice", dottore agronomo a Corato, Puglia.
+Il modulo di contatto invia le email tramite [Web3Forms](https://web3forms.com),
+chiamato direttamente dal browser.
 
-Obiettivo:
+## Struttura
 
-trasformare il sito da vetrina generica a sito commerciale credibile per acquisire contatti da aziende agricole, imprese agrivoltaiche, tecnici, progettisti e clienti che cercano rilievi drone, agricoltura di precisione, progettazione agraria, finanza agevolata e pratiche in zone vincolate.
-
-Stile:
-
-- mediterraneo tecnico, non startup generica;
-
-- colori obbligatori: verde bosco profondo, verde foglia sobrio, sabbia/carta, terra bruciata/terracotta. Evitare giallo acceso, lime, verde acido o palette da template eco generico;
-
-- layout pulito, autorevole, mobile-first;
-
-- niente immagini stock di pale eoliche generiche;
-
-- usa placeholder realistici per drone, oliveto, mappe multispettrali, agrivoltaico, dashboard dati;
-
-- tono: competente, diretto, concreto.
-
-Struttura homepage:
-
-1. Header sticky:
-
-   Logo/testo "Studio Tecnico Agrotech"
-
-   Menu: Servizi, Metodo, Portfolio, Chi sono, Contatti
-
-   CTA: "Richiedi audit"
-
-2. Hero:
-
-   Eyebrow: "Dott. Agr. Michele Loiodice · Agronomo · Corato / Puglia"
-
-   H1: "Decisioni agricole basate su dati, non su impressioni."
-
-   Sottotitolo: "Agricoltura di precisione, rilievi drone, progettazione agraria, pratiche autorizzative e supporto finanziario per aziende agricole che vogliono investire senza improvvisare."
-
-   CTA primario: "Parliamo del progetto"
-
-   CTA secondario: "Vedi applicazioni pratiche"
-
-   A destra: card visuale tipo dashboard/mappa multispettrale con metriche: superficie rilevata, zone omogenee, output finale.
-
-3. Trust bar:
-
-   - Dottore Agronomo
-
-   - Rilievi APR / drone
-
-   - Master agricoltura di precisione
-
-   - Olivo, cereali, mandorlo, agrivoltaico
-
-4. Sezione servizi con 6 card:
-
-   - Agricoltura di precisione
-
-   - Rilievi drone e GIS
-
-   - Progettazione agraria e finanza agevolata
-
-   - Agrivoltaico
-
-   - Titoli abilitativi in zone vincolate
-
-   - Consulenza agronomica per olivo, mandorlo e cereali
-
-   Ogni card deve spiegare: problema risolto, output, CTA "Approfondisci".
-
-5. Metodo operativo:
-
-   5 step orizzontali su desktop e verticali su mobile:
-
-   Diagnosi → Rilievo → Analisi → Progetto → Affiancamento.
-
-   Copy: "Il cliente non compra innovazione: compra meno rischio, meno confusione e un progetto più difendibile."
-
-6. Portfolio / casi studio:
-
-   Trasforma la gallery in casi studio.
-
-   Ogni caso deve avere: problema, metodo, output prodotto, immagini/placeholder.
-
-   Casi iniziali:
-
-   - Rilievo multispettrale su oliveto
-
-   - Studio agronomico per agrivoltaico
-
-   - Rilievo 3D / fabbricato rurale
-
-   - Business plan / finanza agevolata
-
-7. Chi sono:
-
-   Scrittura più asciutta e autorevole.
-
-   Non curriculum lungo.
-
-   Focus su: agronomo, territorio, dati, progettazione, capacità di parlare sia con imprenditore agricolo sia con progettista/ente.
-
-8. CTA finale:
-
-   "Hai un investimento agricolo da valutare?"
-
-   Form con campi:
-
-   Nome e cognome
-
-   Azienda / Località
-
-   Superficie indicativa
-
-   Servizio richiesto
-
-   Messaggio
-
-   CTA: "Invia richiesta"
-
-9. Footer:
-
-   dati fiscali, sedi, email, telefono, privacy, cookie, LinkedIn.
-
-Requisiti tecnici:
-
-- responsive;
-
-- SEO title e description;
-
-- heading corretti H1/H2/H3;
-
-- form chiaro;
-
-- componenti riutilizzabili;
-
-- performance leggera;
-
-- evitare pagine demo, articoli demo, lorem ipsum, immagini template Avada/Energy.
-
-PALETTE DEFINITIVA DA USARE:
-
---bg: #e9e1d0;
-
---paper: #f8f5ef;
-
---ink: #13281f;
-
---muted: #5c665d;
-
---green: #13281f;
-
---green2: #2f5d46;
-
---accent: #b66b3d;
-
---earth: #8a5f3d;
-
-Indicazioni:
-
-- usa #13281f per header, CTA principali e sezioni autorevoli;
-
-- usa #2f5d46 per gradienti, hover e blocchi tecnici;
-
-- usa #e9e1d0 e #f8f5ef come base chiara;
-
-- usa #b66b3d solo come accento, mai dominante;
-
-- non usare giallo-verde, lime, verde fluo o immagini stock troppo “eco”.
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://agritech-data-ground.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/b4f7bcb6-6c16-4da8-82e8-0bab50cb65c8).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
 ```
+index.html                 pagina base (meta statici, font, JSON-LD)
+src/main.tsx               entry point React
+src/router.tsx             router client-side
+src/routes/                route file-based (index, privacy + redirect)
+src/lib/contact.ts         invio del form a Web3Forms + validazione (zod)
+src/config/site.ts         configurazione (nome, email, chiave Web3Forms)
+public/                    file copiati così come sono: favicon, video, sitemap, robots, CNAME
+scripts/postbuild.mjs      genera 404.html e le pagine di route per GitHub Pages
+.github/workflows/         deploy automatico su GitHub Pages a ogni push su main
+```
+
+## 1. Attivare il modulo di contatto (Web3Forms)
+
+1. Vai su <https://web3forms.com>, inserisci `info@studioagrotech.it` e premi *Create Access Key*.
+2. Apri l'email di conferma e copia la **Access Key** (formato UUID).
+3. Inseriscila in **uno** di questi due modi:
+   - **consigliato**: su GitHub → *Settings → Secrets and variables → Actions → Variables →
+     New repository variable* con nome `VITE_WEB3FORMS_ACCESS_KEY` e valore la chiave;
+   - **oppure** incollala nella costante `DEFAULT_ACCESS_KEY` in `src/config/site.ts`.
+
+La chiave è pubblica per design (identifica solo la casella di destinazione), quindi
+può stare nel codice senza rischi. Finché non è impostata, il form mostra il
+messaggio "Il modulo non è ancora attivo" con l'email diretta.
+
+Piano gratuito: 250 invii al mese, anti-spam incluso, reply-to impostato sull'email
+di chi scrive. Web3Forms non conserva il contenuto dei messaggi.
+
+## 2. Pubblicare su GitHub Pages
+
+1. Carica questo progetto nel repository GitHub (branch `main`).
+2. Su GitHub → *Settings → Pages* → *Build and deployment* → **Source: GitHub Actions**.
+3. A ogni push su `main` il workflow `Deploy su GitHub Pages` compila e pubblica il sito.
+   Si può lanciare a mano da *Actions → Deploy su GitHub Pages → Run workflow*.
+
+## 3. Dominio micheleloiodice.it (DNS su Aruba)
+
+Il file `public/CNAME` contiene già `micheleloiodice.it`. Sul pannello DNS di Aruba
+(mantenendo solo la registrazione del dominio, senza hosting) impostare:
+
+| Tipo  | Host | Valore                      |
+| ----- | ---- | --------------------------- |
+| A     | @    | 185.199.108.153             |
+| A     | @    | 185.199.109.153             |
+| A     | @    | 185.199.110.153             |
+| A     | @    | 185.199.111.153             |
+| CNAME | www  | `<utente-github>.github.io` |
+
+Poi su GitHub → *Settings → Pages → Custom domain* inserire `micheleloiodice.it`,
+attendere la verifica DNS e spuntare **Enforce HTTPS**.
+La propagazione DNS può richiedere fino a 24-48 ore.
+
+## Sviluppo in locale
+
+Richiede Node.js 20 o superiore.
+
+```bash
+npm install
+npm run dev        # server di sviluppo su http://localhost:5173
+npm run build      # build di produzione in dist/ (+ 404.html e pagine di route)
+npm run preview    # anteprima della cartella dist/
+npm run typecheck  # controllo TypeScript
+```
+
+Per provare il form in locale, copiare `.env.example` in `.env.local` e valorizzare
+`VITE_WEB3FORMS_ACCESS_KEY`.
+
+## Note tecniche
+
+- Le route sono gestite dal browser (SPA). `scripts/postbuild.mjs` crea `404.html`
+  e una copia di `index.html` per ogni route nota (`/privacy`, `/contact`, ...) così
+  GitHub Pages risponde 200 anche sugli URL diretti.
+- Titolo e meta di ogni pagina vengono impostati dalle route tramite `HeadContent`;
+  React 19 li sposta automaticamente nell'`<head>`.
+- Il video del caso studio 3D è in `public/media/` e non passa dal bundler.
+- `src/routeTree.gen.ts` è generato automaticamente dal plugin del router a ogni
+  build e non va committato.

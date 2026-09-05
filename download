@@ -1,0 +1,27 @@
+# Log
+logs
+*.log
+npm-debug.log*
+
+# Dipendenze e build
+node_modules
+dist
+
+# Route tree generato da @tanstack/router-plugin (ricreato a ogni build)
+src/routeTree.gen.ts
+
+# Variabili locali
+.env
+.env.local
+*.local
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
