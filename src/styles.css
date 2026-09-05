@@ -48,6 +48,10 @@
   --accent: #b66b3d;
   --earth: #8a5f3d;
 
+  /* Varianti chiare: marchio e testi sopra il verde scuro */
+  --green-light: #8dc2a4;
+  --accent-light: #d59468;
+
   /* Mapped to semantic shadcn tokens (oklch) */
   --background: oklch(0.91 0.025 80);          /* #e9e1d0 */
   --foreground: oklch(0.22 0.03 160);          /* #13281f */

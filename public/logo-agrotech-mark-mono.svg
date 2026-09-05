@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Studio Tecnico Agrotech">
+  <title>Studio Tecnico Agrotech</title>
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 94 L50 8 L92 94" stroke-width="6"/>
+    <path d="M26 94 L50 45 L74 94" stroke-width="5.2"/>
+    <path d="M37 82 L50 57 L63 82 Z" stroke-width="4.4"/>
+  </g>
+</svg>

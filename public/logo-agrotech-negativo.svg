@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 110" width="420" height="110" role="img" aria-label="Studio Tecnico Agrotech">
+  <title>Studio Tecnico Agrotech</title>
+  <g transform="translate(6 8) scale(0.94)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 94 L50 8 L92 94" stroke="#f8f5ef" stroke-width="6"/>
+    <path d="M26 94 L50 45 L74 94" stroke="#8dc2a4" stroke-width="5.2"/>
+    <path d="M37 82 L50 57 L63 82 Z" stroke="#d59468" stroke-width="4.4"/>
+  </g>
+  <text x="122" y="62" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="46" font-weight="500" fill="#f8f5ef">Agrotech</text>
+  <text x="124" y="86" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="500" letter-spacing="2.6" fill="#8dc2a4">STUDIO TECNICO</text>
+</svg>

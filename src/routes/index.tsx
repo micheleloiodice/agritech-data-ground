@@ -8,6 +8,7 @@ import caseFinance from "@/assets/case-finance.jpg";
 import portraitChisono from "@/assets/portrait-chisono.jpg";
 import thumb3dSplit from "@/assets/thumb-prima-dopo-3d-split.jpg";
 import { sendContactRequest } from "@/lib/contact";
+import { LogoMark } from "@/components/LogoMark";
 
 // Il video è in public/media: viene copiato così com'è nel build (niente bundling).
 const video3d = "/media/video-prima-dopo-3d-optimized.mp4";
@@ -82,7 +83,7 @@ function Header() {
     <header className="sticky top-0 z-50 backdrop-blur-md bg-[color-mix(in_oklab,var(--background)_85%,transparent)] border-b border-border/60">
       <div className="container-page flex items-center justify-between h-16">
         <a href="#" className="flex items-center gap-2.5">
-          <span className="grid place-items-center w-8 h-8 rounded-md bg-[var(--ink)] text-[var(--paper)] font-display text-sm">A</span>
+          <LogoMark size={32} />
           <span className="font-display text-[15px] leading-tight">
             Studio Tecnico <span className="text-[var(--green2)]">Agrotech</span>
           </span>
@@ -708,7 +709,7 @@ function Footer() {
       <div className="container-page py-14 grid md:grid-cols-4 gap-10">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2.5 mb-4">
-            <span className="grid place-items-center w-8 h-8 rounded-md bg-[var(--paper)] text-[var(--ink)] font-display">A</span>
+            <LogoMark size={32} variant="negative" />
             <span className="font-display text-[var(--paper)]">Studio Tecnico Agrotech</span>
           </div>
           <p className="max-w-sm leading-relaxed">
