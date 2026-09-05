@@ -5,9 +5,12 @@ import caseOlive from "@/assets/case-olive.jpg";
 import caseAgri from "@/assets/case-agrivoltaico.jpg";
 import case3d from "@/assets/case-3d.jpg";
 import caseFinance from "@/assets/case-finance.jpg";
-import portraitChisono from "@/assets/portrait-chisono.jpg.asset.json";
-import thumb3dSplit from "@/assets/thumb-prima-dopo-3d-split.jpg.asset.json";
-import video3d from "@/assets/video-prima-dopo-3d-optimized.mp4.asset.json";
+import portraitChisono from "@/assets/portrait-chisono.jpg";
+import thumb3dSplit from "@/assets/thumb-prima-dopo-3d-split.jpg";
+import { sendContactRequest } from "@/lib/contact";
+
+// Il video è in public/media: viene copiato così com'è nel build (niente bundling).
+const video3d = "/media/video-prima-dopo-3d-optimized.mp4";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -16,31 +19,9 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Dott. Agr. Michele Loiodice — studio in Piazza Caduti in guerra, 11, Corato (BA). Agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico, finanza agevolata e pratiche autorizzative in Puglia." },
       { property: "og:title", content: "Studio Tecnico Agrotech — Agronomo a Corato" },
       { property: "og:description", content: "Dott. Agr. Michele Loiodice — studio in Piazza Caduti in guerra, 11, Corato (BA), Puglia. Decisioni agricole basate su dati." },
-      { property: "og:type", content: "website" },
       { property: "og:url", content: "https://micheleloiodice.it/" },
     ],
     links: [{ rel: "canonical", href: "https://micheleloiodice.it/" }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          name: "Studio Tecnico Agrotech",
-          description: "Studio del Dott. Agr. Michele Loiodice — agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico e finanza agevolata.",
-          email: "info@studioagrotech.it",
-          telephone: "+39 380 1428442",
-          url: "https://micheleloiodice.it/",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "Piazza Caduti in guerra, 11",
-            addressLocality: "Corato",
-            addressRegion: "BA",
-            addressCountry: "IT",
-          },
-        }),
-      },
-    ],
   }),
   component: Home,
 });
@@ -405,7 +386,7 @@ function CaseStudy3D() {
             className="group relative block aspect-[16/10] lg:aspect-auto lg:h-full overflow-hidden bg-[var(--ink)] cursor-pointer"
           >
             <img
-              src={thumb3dSplit.url}
+              src={thumb3dSplit}
               alt="Confronto prima e dopo: ricostruzione 3D di fabbricato rurale"
               loading="lazy"
               className="w-full h-full object-cover"
@@ -487,8 +468,8 @@ function CaseStudy3D() {
               Chiudi ✕
             </button>
             <video
-              src={video3d.url}
-              poster={thumb3dSplit.url}
+              src={video3d}
+              poster={thumb3dSplit}
               controls
               autoPlay
               preload="metadata"
@@ -508,7 +489,7 @@ function About() {
       <div className="container-page grid lg:grid-cols-[0.85fr_1fr] gap-12 lg:gap-20 items-center">
         <div className="order-2 lg:order-1 relative">
           <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-border max-w-md">
-            <img src={portraitChisono.url} alt="Dott. Agr. Michele Loiodice" loading="lazy" className="w-full h-full object-cover" />
+            <img src={portraitChisono} alt="Dott. Agr. Michele Loiodice" loading="lazy" className="w-full h-full object-cover" />
           </div>
           <div className="hidden lg:block absolute -bottom-6 -right-6 bg-[var(--ink)] text-[var(--paper)] p-5 rounded-xl max-w-[220px]">
             <div className="font-display text-2xl">Corato</div>
@@ -590,21 +571,14 @@ function Contact() {
 
     setStatus("loading");
     setErrorMsg("");
-    try {
-      const res = await fetch("/api/public/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error === "validation" ? "Controlla i campi obbligatori." : "Invio non riuscito.");
-      }
+    // Invio diretto dal browser a Web3Forms: nessun server necessario (vedi src/lib/contact.ts).
+    const result = await sendContactRequest(payload);
+    if (result.ok) {
       setStatus("sent");
       form.reset();
-    } catch (err) {
+    } else {
       setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Errore di rete. Riprova.");
+      setErrorMsg(result.error);
     }
   }
 

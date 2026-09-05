@@ -1,32 +1,24 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  Outlet,
-  Link,
-  createRootRouteWithContext,
-  useRouter,
-  HeadContent,
-  Scripts,
-} from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { Outlet, Link, createRootRoute, useRouter, HeadContent } from "@tanstack/react-router";
 
-import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
+const DEFAULT_TITLE = "Studio Tecnico Agrotech — Dott. Agr. Michele Loiodice";
+const DEFAULT_DESCRIPTION =
+  "Agronomo in Piazza Caduti in guerra, 11 — Corato (BA), Puglia. Agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico e finanza agevolata per aziende agricole.";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Pagina non trovata</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          La pagina che cerchi non esiste o è stata spostata.
         </p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
+            Torna alla home
           </Link>
         </div>
       </div>
@@ -37,18 +29,15 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          Questa pagina non si è caricata
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Si è verificato un errore. Puoi riprovare oppure tornare alla home.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -58,13 +47,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            Riprova
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            Torna alla home
           </a>
         </div>
       </div>
@@ -72,60 +61,29 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+export const Route = createRootRoute({
   head: () => ({
     meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Studio Tecnico Agrotech — Dott. Agr. Michele Loiodice" },
-      { name: "description", content: "Agronomo in Piazza Caduti in guerra, 11 — Corato (BA), Puglia. Agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico e finanza agevolata per aziende agricole." },
-      { name: "author", content: "Studio Tecnico Agrotech" },
-      { name: "google-site-verification", content: "Ni4G8K0HVIKy2qOEjnF0hrA83GAd9oh-M86_biFIJDY" },
-      { property: "og:title", content: "Studio Tecnico Agrotech — Dott. Agr. Michele Loiodice" },
-      { property: "og:description", content: "Agronomo in Piazza Caduti in guerra, 11 — Corato (BA), Puglia. Agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico e finanza agevolata per aziende agricole." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Studio Tecnico Agrotech — Dott. Agr. Michele Loiodice" },
-      { name: "twitter:description", content: "Agronomo in Piazza Caduti in guerra, 11 — Corato (BA), Puglia. Agricoltura di precisione, rilievi drone, progettazione agraria, agrivoltaico e finanza agevolata per aziende agricole." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6be0bff3-1352-45b6-81b6-36f54df42523/id-preview-94dfd1fe--b4f7bcb6-6c16-4da8-82e8-0bab50cb65c8.lovable.app-1781956655133.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6be0bff3-1352-45b6-81b6-36f54df42523/id-preview-94dfd1fe--b4f7bcb6-6c16-4da8-82e8-0bab50cb65c8.lovable.app-1781956655133.png" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: "/__l5e/assets-v1/76e24ba7-075b-40db-bfc7-5ca7d21e0a18/favicon.png" },
-      { rel: "apple-touch-icon", href: "/__l5e/assets-v1/76e24ba7-075b-40db-bfc7-5ca7d21e0a18/favicon.png" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" },
+      { title: DEFAULT_TITLE },
+      { name: "description", content: DEFAULT_DESCRIPTION },
+      { property: "og:title", content: DEFAULT_TITLE },
+      { property: "og:description", content: DEFAULT_DESCRIPTION },
+      { name: "twitter:title", content: DEFAULT_TITLE },
+      { name: "twitter:description", content: DEFAULT_DESCRIPTION },
     ],
   }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
 
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
 function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
-
   return (
-    <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+    <>
+      {/* Titolo e meta delle route: React 19 li sposta automaticamente in <head>. */}
+      <HeadContent />
+      {/* Obbligatorio: le route figlie vengono renderizzate qui. */}
       <Outlet />
-    </QueryClientProvider>
+    </>
   );
 }

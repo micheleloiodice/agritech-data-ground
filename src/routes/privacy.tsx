@@ -39,8 +39,7 @@ function PrivacyPage() {
               Vengono trattati esclusivamente i dati che l'utente fornisce volontariamente
               compilando il modulo di contatto: nome e cognome, email, telefono (facoltativo),
               azienda o località (facoltativo), superficie indicativa (facoltativo), servizio
-              richiesto e contenuto del messaggio. A scopo di sicurezza e prevenzione abusi
-              vengono inoltre registrati indirizzo IP e user-agent del browser.
+              richiesto e contenuto del messaggio.
             </p>
 
             <h2 className="font-display text-xl mt-8">Finalità e base giuridica</h2>
@@ -53,11 +52,13 @@ function PrivacyPage() {
 
             <h2 className="font-display text-xl mt-8">Modalità e conservazione</h2>
             <p>
-              I dati sono conservati su infrastrutture cloud sicure all'interno dell'Unione
-              Europea, per il tempo strettamente necessario a evadere la richiesta e, in caso
-              di apertura di un rapporto professionale, per il periodo previsto dagli obblighi
-              fiscali e deontologici. Non vengono ceduti a terze parti né utilizzati per
-              attività di marketing o profilazione.
+              Il modulo di contatto inoltra la richiesta come email alla casella dello Studio
+              tramite il servizio Web3Forms (responsabile del trattamento), che non conserva
+              il contenuto dei messaggi. I dati sono poi conservati nella casella di posta
+              dello Studio per il tempo strettamente necessario a evadere la richiesta e, in
+              caso di apertura di un rapporto professionale, per il periodo previsto dagli
+              obblighi fiscali e deontologici. Non vengono ceduti a terze parti né utilizzati
+              per attività di marketing o profilazione.
             </p>
 
             <h2 className="font-display text-xl mt-8">Diritti dell'interessato</h2>

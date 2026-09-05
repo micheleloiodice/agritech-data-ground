@@ -1,1 +1,0 @@
-ALTER TABLE public.contact_requests ADD COLUMN IF NOT EXISTS status text NOT NULL DEFAULT 'pending';
