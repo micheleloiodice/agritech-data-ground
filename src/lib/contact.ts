@@ -15,8 +15,8 @@ export const contactSchema = z.object({
   privacy: z
     .boolean()
     .refine((v) => v === true, "Devi accettare l'informativa privacy per inviare la richiesta."),
-  // Honeypot: i bot lo compilano, gli utenti reali no (campo nascosto).
-  website: z.string().max(0).optional().or(z.literal("")),
+  // Honeypot: checkbox nascosta, i bot la spuntano, gli utenti reali no.
+  botcheck: z.boolean().optional(),
 });
 
 export type ContactInput = z.input<typeof contactSchema>;
@@ -29,17 +29,17 @@ export type ContactResult = { ok: true } | { ok: false; error: string };
  * che inoltra l'email a info@studioagrotech.it con reply-to del mittente.
  */
 export async function sendContactRequest(raw: ContactInput): Promise<ContactResult> {
+  // Honeypot spuntato → probabile bot: fingiamo successo senza inviare nulla.
+  if (raw.botcheck === true) {
+    return { ok: true };
+  }
+
   const parsed = contactSchema.safeParse(raw);
   if (!parsed.success) {
     const first = parsed.error.issues[0]?.message ?? "Controlla i campi obbligatori.";
     return { ok: false, error: first };
   }
   const data = parsed.data;
-
-  // Honeypot compilato → probabile bot: fingiamo successo senza inviare nulla.
-  if (data.website && data.website.length > 0) {
-    return { ok: true };
-  }
 
   if (!SITE.web3formsAccessKey) {
     console.error("[contact] chiave Web3Forms non configurata (vedi src/config/site.ts)");

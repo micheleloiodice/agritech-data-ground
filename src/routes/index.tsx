@@ -560,7 +560,7 @@ function Contact() {
       servizio: String(fd.get("servizio") || "").trim(),
       messaggio: String(fd.get("messaggio") || "").trim(),
       privacy: fd.get("privacy") === "on",
-      website: String(fd.get("website") || ""), // honeypot
+      botcheck: fd.get("botcheck") === "on", // honeypot: solo i bot lo spuntano
     };
 
     if (!payload.privacy) {
@@ -647,9 +647,9 @@ function Contact() {
                 <label className="block text-xs uppercase tracking-wider text-muted-foreground mb-2">Messaggio *</label>
                 <textarea name="messaggio" rows={4} required minLength={5} className="w-full bg-[var(--paper)] border border-border rounded-lg px-3.5 py-3 text-[var(--ink)] focus:outline-none focus:border-[var(--green2)]" />
               </div>
-              {/* Honeypot — hidden from real users */}
-              <div className="sr-only" aria-hidden="true">
-                <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+              {/* Honeypot: checkbox nascosta, il completamento automatico del browser non la tocca */}
+              <div hidden aria-hidden="true">
+                <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" />
               </div>
               {status === "error" && (
                 <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">
